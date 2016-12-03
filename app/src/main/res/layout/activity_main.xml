@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.hariofspades.incdec.MainActivity">
+
+    <com.hariofspades.incdeclibrary.IncDecCircular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textSize="44"
+        android:id="@+id/incdec"
+        app:textColor="@color/white"
+        app:leftButtonColorTint="@color/colorPrimaryDark"
+        app:rightButtonColorTinit="@color/colorPrimary"
+        app:leftDrawableTint="@color/white"
+        app:rightDrawableTint="@color/white"
+        app:leftDrawable="@drawable/ic_remove_black_24dp"
+        app:rightDrawable="@drawable/ic_add_black_24dp"/>
+
+    <com.hariofspades.incdeclibrary.IncDecCircular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textSize="24"
+        android:layout_marginTop="20dp"
+        android:id="@+id/incdecvertical"
+        app:textColor="@color/white"
+        app:leftButtonColorTint="@color/colorPrimaryDark"
+        app:rightButtonColorTinit="@color/colorPrimary"
+        app:leftDrawableTint="@color/white"
+        app:rightDrawableTint="@color/white"
+        app:leftDrawable="@drawable/ic_add_black_24dp"
+        app:rightDrawable="@drawable/ic_remove_black_24dp"/>
+
+    <com.hariofspades.incdeclibrary.IncDecCircular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textSize="24"
+        android:id="@+id/incdecInt"
+        android:layout_marginTop="20dp"
+        app:textColor="@color/white"
+        app:leftButtonColorTint="@color/colorPrimaryDark"
+        app:rightButtonColorTinit="@color/colorPrimary"
+        app:leftDrawableTint="@color/white"
+        app:rightDrawableTint="@color/white"
+        app:leftDrawable="@drawable/ic_remove_black_24dp"
+        app:rightDrawable="@drawable/ic_add_black_24dp"/>
+
+    <com.hariofspades.incdeclibrary.IncDecImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textSizeB="24"
+        android:id="@+id/incdecImg"
+        android:layout_marginTop="20dp"
+        app:textColorB="@color/white"
+        app:leftButtonColorTintB="@color/colorPrimaryDark"
+        app:rightButtonColorTinitB="@color/colorPrimary"
+        app:leftDrawableTintB="@color/white"
+        app:rightDrawableTintB="@color/white"
+        app:leftDrawableB="@drawable/ic_remove_black_24dp"
+        app:rightDrawableB="@drawable/ic_add_black_24dp"/>
+
+    <com.hariofspades.incdeclibrary.IncDecImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textSizeB="24"
+        android:id="@+id/incdecbut2"
+        android:layout_marginTop="20dp"
+        app:textColorB="@color/white"
+        app:leftButtonColorTintB="@color/colorPrimaryDark"
+        app:rightButtonColorTinitB="@color/colorPrimary"
+        app:leftDrawableTintB="@color/white"
+        app:rightDrawableTintB="@color/white"
+        app:leftDrawableB="@drawable/ic_remove_black_24dp"
+        app:rightDrawableB="@drawable/ic_add_black_24dp"/>
+
+</LinearLayout>

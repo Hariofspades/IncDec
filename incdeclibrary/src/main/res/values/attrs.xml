@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="IncDecCircular">
+
+    <attr name="leftButtonColorTint" format="color"/>
+    <attr name="rightButtonColorTinit" format="color"/>
+    <attr name="leftDrawable" format="reference"/>
+    <attr name="rightDrawable" format="reference"/>
+    <attr name="leftDrawableTint" format="color"/>
+    <attr name="rightDrawableTint" format="color"/>
+    <attr name="textSize" format="float"/>
+    <attr name="textColor" format="color"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="IncDecImageButton">
+
+        <attr name="leftButtonColorTintB" format="color"/>
+        <attr name="rightButtonColorTinitB" format="color"/>
+        <attr name="leftDrawableB" format="reference"/>
+        <attr name="rightDrawableB" format="reference"/>
+        <attr name="leftDrawableTintB" format="color"/>
+        <attr name="rightDrawableTintB" format="color"/>
+        <attr name="textSizeB" format="float"/>
+        <attr name="textColorB" format="color"/>
+
+    </declare-styleable>
+</resources>
