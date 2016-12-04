@@ -1,9 +1,21 @@
 apply plugin: 'com.android.library'
 
 ext {
-    PUBLISH_GROUP_ID = 'com.hariofspades'
-    PUBLISH_ARTIFACT_ID = 'incdec'
-    PUBLISH_VERSION = '1.0'
+    bintrayRepo = 'Android'
+    bintrayName = 'incdec'
+    publishedGroupId = 'com.hariofspades.IncDec'
+    libraryName = 'incdeclibrary'
+    artifact = 'incdeclibrary'
+    libraryDescription = 'Perform Increment and Decrement operation with single click and long press'
+    siteUrl = 'https://github.com/Hariofspades/IncDec'
+    gitUrl = 'https://github.com/Hariofspades/IncDec.git'
+    libraryVersion = '0.0.1'
+    developerId = 'hariofspades'
+    developerName = 'Hari Vignesh Jayapalan'
+    developerEmail = 'hariutd@gmail.com'
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
 }
 
 android {
@@ -14,7 +26,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -37,4 +49,7 @@ dependencies {
     compile 'com.android.support:design:25.0.1'
 
 }
+
+apply from: 'https://raw.githubusercontent.com/brightec/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/brightec/JCenter/master/bintrayv1.gradle'
 
