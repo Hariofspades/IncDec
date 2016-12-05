@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,
                         String.valueOf(incdec.getCurrentIndex()), Toast.LENGTH_SHORT).show();
+
             }
         });
 
