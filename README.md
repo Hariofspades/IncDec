@@ -1,7 +1,7 @@
 # IncDec Android UI Library
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/Hariofspades/IncDec/blob/master/LICENSE)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Networking-blue.svg?style=flat)](https://android-arsenal.com/details/1/4784)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-IncDec-blue.svg?style=flat)](https://android-arsenal.com/details/1/4784)
 
 <img src=https://raw.githubusercontent.com/Hariofspades/IncDec/master/assets/wallpaper.png >
 
