@@ -69,8 +69,11 @@ ArrayList<String> values=new ArrayList<>();
  incdec.enableLongPress(true,true,500);
 ```
 Decoding the above function parameters
+
 setConfiguration - Layout's orientation, type(array,integer,float),left button (increment/decrement), right button (increment/decrement)
+
 setArrayList - arraylist values, interval and start index
+
 enableLongPress - for left button, right button and the speed in ms for counting
 
 Making IncDec behave for float values
@@ -83,7 +86,9 @@ incdec.setprecision("%.1f");
 incdec.enableLongPress(false,false,500);
 ```
 Decoding function parameters
+
 setupValues - intial value final value, interval and start value
+
 setprecision - Restricting decimal places
 
 Making IncDec behave for integers
