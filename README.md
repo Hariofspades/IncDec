@@ -68,7 +68,7 @@ ArrayList<String> values=new ArrayList<>();
  incdec.setArrayList(values,1,2);
  incdec.enableLongPress(true,true,500);
 ```
-Decoding the above function parameters
+# Decoding the above function parameters
 
 setConfiguration - Layout's orientation, type(array,integer,float),left button (increment/decrement), right button (increment/decrement)
 
@@ -85,7 +85,7 @@ incdec.setupValues(2,40,(float)0.7,10);
 incdec.setprecision("%.1f");
 incdec.enableLongPress(false,false,500);
 ```
-Decoding function parameters
+# Decoding function parameters 
 
 setupValues - intial value final value, interval and start value
 
