@@ -131,7 +131,7 @@ public class IncDecImageButton extends RelativeLayout {
         textSize=arr.getFloat(R.styleable.IncDecImageButton_textSizeB,13);
         textColor=arr.getColor(R.styleable.IncDecImageButton_textColorB,defaultTextColor);
         /** Component declaration */
-        leftButton=(ImageButton) findViewById(R.id.decrement_button)R;
+        leftButton=(ImageButton) findViewById(R.id.decrement_button);
         rightButton=(ImageButton) findViewById(R.id.increment_button);
         counter=(TextView) findViewById(R.id.number_counter);
         layout=(LinearLayout) findViewById(R.id.layout);
