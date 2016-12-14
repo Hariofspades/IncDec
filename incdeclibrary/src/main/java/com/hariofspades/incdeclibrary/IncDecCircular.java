@@ -585,6 +585,13 @@ public class IncDecCircular extends RelativeLayout{
         counter.setText(array.get(startIndex));
     }
 
+    public void setArrayInitialization(int interval,int startIndex){
+        this.int_val=interval;
+        this.startIndex=startIndex;
+        this.index=startIndex;
+        counter.setText(array.get(startIndex));
+    }
+
     /** Receive the value */
     public String getValue(){
         return counter.getText().toString();

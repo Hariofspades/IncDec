@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         incdec.setConfiguration(LinearLayout.HORIZONTAL,IncDecCircular.TYPE_ARRAY,
                 IncDecCircular.DECREMENT,IncDecCircular.INCREMENT);
         incdec.setArrayList(values,1,2);
+        incdec.setArrayInitialization(1,4);
         incdec.enableLongPress(true,true,500);
 
         incdec_vert=(IncDecCircular) findViewById(R.id.incdecvertical);
