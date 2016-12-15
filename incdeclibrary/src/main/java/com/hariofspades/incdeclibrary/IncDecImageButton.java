@@ -86,6 +86,7 @@ public class IncDecImageButton extends RelativeLayout {
     private int oldIntValue;
     private int oldFloatValue;
     private int oldIndex;
+    private int startIndexVal=0, stopIndexVal=0;
 
 
 
@@ -254,6 +255,26 @@ public class IncDecImageButton extends RelativeLayout {
             e.printStackTrace();
         }
     }
+
+    private boolean checkIncVaidation(int startValue, int minimum, int maximum){
+        if((startValue>=minimum && startValue<=maximum)&&(startValue!=maximum)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    private boolean checkDecVaidation(int startValue, int minimum, int maximum){
+        if((startValue>=minimum && startValue<=maximum)&&(startValue!=minimum)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
     private void initClickListener(ImageButton leftButton, ImageButton rightButton, final TextView counter) {
         leftButton.setOnClickListener(new View.OnClickListener() {
@@ -429,17 +450,23 @@ public class IncDecImageButton extends RelativeLayout {
         new Thread(runnable).start();
     }
 
+
     public void IncrementAction(){
         if(type.equals(TYPE_ARRAY)){
-            oldIndex=index;
-            try{
-                index=index+int_val;
-                counter.setText(array.get(index));
+            try {
+                oldIndex = index;
+                if (checkIncVaidation(index, startIndexVal, stopIndexVal)) {
+                    index = index + int_val;
+                    counter.setText(array.get(index));
+                    callArryListener(this, oldIndex, index);
+                } else {
+                    index = stopIndexVal;
+                    counter.setText(array.get(stopIndexVal));
+                }
             }catch (Exception e){
-                index=array.size()-1;
-                counter.setText(array.get(array.size()-1));
+                e.printStackTrace();
             }
-            callArryListener(this,oldIndex,index);
+
         }else if(type.equals(TYPE_FLOAT)){
             float num= Float.parseFloat(counter.getText().toString());
             setFloatNumber(num+interval, true,num);
@@ -453,15 +480,17 @@ public class IncDecImageButton extends RelativeLayout {
 
     private void DecrementAction() {
         if(type.equals(TYPE_ARRAY)){
-            oldIndex=index;
-            try{
-                index=index-int_val;
-                counter.setText(array.get(index));
-            }catch (Exception e){
-                index=0;
-                counter.setText(array.get(index));
-            }
-            callArryListener(this,oldIndex,index);
+            try {
+                oldIndex = index;
+                if (checkDecVaidation(index, startIndexVal, stopIndexVal)) {
+                    index = index - int_val;
+                    counter.setText(array.get(index));
+                    callArryListener(this, oldIndex, index);
+                } else {
+                    index = startIndexVal;
+                    counter.setText(array.get(startIndexVal));
+                }
+            }catch (Exception e){}
         }else if(type.equals(TYPE_FLOAT)){
             float num= Float.parseFloat(counter.getText().toString());
             setFloatNumber(num-interval, true,num);
@@ -554,13 +583,26 @@ public class IncDecImageButton extends RelativeLayout {
     }
 
 
-    public void setArrayList(ArrayList<String> arrayList,int interval,int startIndex){
+    /** Setting arraylist */
+    public void setArrayList(ArrayList<String> arrayList){
         this.array=arrayList;
+    }
+
+    public void setArrayInitialization(int interval,int startIndex){
         this.int_val=interval;
         this.startIndex=startIndex;
         this.index=startIndex;
         counter.setText(array.get(startIndex));
     }
+
+    public void setArrayIndexes(int startIndexVal, int stopIndexVal, int interval){
+        this.startIndexVal=startIndexVal;
+        this.stopIndexVal=stopIndexVal;
+        this.int_val=interval;
+        this.index=startIndexVal;
+        counter.setText(array.get(startIndexVal));
+    }
+
 
     public String getValue(){
         return counter.getText().toString();

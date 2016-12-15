@@ -65,14 +65,17 @@ ArrayList<String> values=new ArrayList<>();
  IncDecCircular incdec=(IncDecCircular)findViewById(R.id.incdec);
  incdec.setConfiguration(LinearLayout.HORIZONTAL,IncDecCircular.TYPE_ARRAY,
                 IncDecCircular.DECREMENT,IncDecCircular.INCREMENT);
- incdec.setArrayList(values,1,2);
- incdec.enableLongPress(true,true,500);
+  incdec.setArrayList(values);
+  incdec.setArrayIndexes(1,3,1);
+  incdec.enableLongPress(true,true,500);
 ```
 # Decoding the above function parameters
 
 setConfiguration - Layout's orientation, type(array,integer,float),left button (increment/decrement), right button (increment/decrement)
 
-setArrayList - arraylist values, interval and start index
+setArrayList - arraylist values
+
+setArrayIndexes - starting index, stoping index, interval count
 
 enableLongPress - for left button, right button and the speed in ms for counting
 

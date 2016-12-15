@@ -33,6 +33,9 @@ proguard/
 ## Directory-based project format:
 .idea/
 
+##Old code
+./oldcodes
+
 ## File-based project format:
 *.ipr
 *.iws

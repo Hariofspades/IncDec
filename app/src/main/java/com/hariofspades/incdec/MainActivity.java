@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         incdec=(IncDecCircular)findViewById(R.id.incdec);
         incdec.setConfiguration(LinearLayout.HORIZONTAL,IncDecCircular.TYPE_ARRAY,
                 IncDecCircular.DECREMENT,IncDecCircular.INCREMENT);
-        incdec.setArrayList(values,1,2);
-        incdec.setArrayInitialization(1,4);
+        incdec.setArrayList(values);
+        incdec.setArrayIndexes(0,values.size()-1,1);
         incdec.enableLongPress(true,true,500);
 
         incdec_vert=(IncDecCircular) findViewById(R.id.incdecvertical);
@@ -57,9 +57,10 @@ public class MainActivity extends AppCompatActivity {
         incdecInt.enableLongPress(true,true,500);
 
         incdecImg2=(IncDecImageButton) findViewById(R.id.incdecbut2);
-        incdecImg2.setConfiguration(LinearLayout.HORIZONTAL,IncDecCircular.TYPE_INTEGER,
+        incdecImg2.setConfiguration(LinearLayout.HORIZONTAL,IncDecCircular.TYPE_ARRAY,
                 IncDecCircular.DECREMENT,IncDecCircular.INCREMENT);
-        incdecImg2.setupValues(0,20,1,4);
+        incdecImg2.setArrayList(values);
+        incdecImg2.setArrayIndexes(2,3,1);
         incdecImg2.enableLongPress(true,true,500);
 
         incdec_vert.setOnClickListener(new IncDecCircular.OnClickListener() {
@@ -67,11 +68,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,
                         String.valueOf(incdec.getCurrentIndex()), Toast.LENGTH_SHORT).show();
+                incdec.setArrayIndexes(2,3,1);
 
             }
         });
 
-        incdec_vert.setOnValueChangeListener(new IncDecCircular.OnValueChangeListener() {
+        incdec.setOnValueChangeListener(new IncDecCircular.OnValueChangeListener() {
             @Override
             public void onValueChange(IncDecCircular view, float oldValue, float newValue) {
                 Toast.makeText(MainActivity.this, String.valueOf(oldValue)+"/"+

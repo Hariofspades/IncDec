@@ -88,7 +88,7 @@ public class IncDecCircular extends RelativeLayout{
     private int oldIntValue;
     private int oldFloatValue;
     private int oldIndex;
-
+    private int startIndexVal=0, stopIndexVal=0;
 
 
     public IncDecCircular(Context context) {
@@ -445,6 +445,52 @@ public class IncDecCircular extends RelativeLayout{
     /** Perform the increment action */
     public void IncrementAction(){
         if(type.equals(TYPE_ARRAY)){
+            try {
+                oldIndex = index;
+                if (checkIncVaidation(index, startIndexVal, stopIndexVal)) {
+                    index = index + int_val;
+                    counter.setText(array.get(index));
+                    callArryListener(this, oldIndex, index);
+                } else {
+                    index = stopIndexVal;
+                    counter.setText(array.get(stopIndexVal));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }else if(type.equals(TYPE_FLOAT)){
+            float num= Float.parseFloat(counter.getText().toString());
+            setFloatNumber(num+interval, true,num);
+        }else if(type.equals(TYPE_INTEGER)){
+            int num= Integer.parseInt(counter.getText().toString());
+            setIntNumber(num+(int)interval,true,num);
+        }else
+            Log.e(TAG,"error");
+    }
+
+
+    private boolean checkIncVaidation(int startValue, int minimum, int maximum){
+        if((startValue>=minimum && startValue<=maximum)&&(startValue!=maximum)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    private boolean checkDecVaidation(int startValue, int minimum, int maximum){
+        if((startValue>=minimum && startValue<=maximum)&&(startValue!=minimum)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+/*    public void IncrementAction(){
+        if(type.equals(TYPE_ARRAY)){
             oldIndex=index;
             try{
                 index=index+int_val;
@@ -462,10 +508,33 @@ public class IncDecCircular extends RelativeLayout{
             setIntNumber(num+(int)interval,true,num);
         }else
             Log.e(TAG,"error");
-    }
+    } */
 
     /** Decrement Action */
     private void DecrementAction() {
+        if(type.equals(TYPE_ARRAY)){
+            try {
+                oldIndex = index;
+                if (checkDecVaidation(index, startIndexVal, stopIndexVal)) {
+                    index = index - int_val;
+                    counter.setText(array.get(index));
+                    callArryListener(this, oldIndex, index);
+                } else {
+                    index = startIndexVal;
+                    counter.setText(array.get(startIndexVal));
+                }
+            }catch (Exception e){}
+        }else if(type.equals(TYPE_FLOAT)){
+            float num= Float.parseFloat(counter.getText().toString());
+            setFloatNumber(num-interval, true,num);
+        }else if(type.equals(TYPE_INTEGER)){
+            int num= Integer.parseInt(counter.getText().toString());
+            setIntNumber(num-(int)interval,true,num);
+        }else
+            Log.e(TAG,"error");
+    }
+
+/*    private void DecrementAction() {
         if(type.equals(TYPE_ARRAY)){
             oldIndex=index;
             try{
@@ -484,7 +553,7 @@ public class IncDecCircular extends RelativeLayout{
             setIntNumber(num-(int)interval,true,num);
         }else
             Log.e(TAG,"error");
-    }
+    } */
 
     /** Set float value */
     public void setFloatNumber(float number, boolean notifyListener,float num){
@@ -577,12 +646,8 @@ public class IncDecCircular extends RelativeLayout{
     }
 
     /** Setting arraylist */
-    public void setArrayList(ArrayList<String> arrayList,int interval,int startIndex){
+    public void setArrayList(ArrayList<String> arrayList){
         this.array=arrayList;
-        this.int_val=interval;
-        this.startIndex=startIndex;
-        this.index=startIndex;
-        counter.setText(array.get(startIndex));
     }
 
     public void setArrayInitialization(int interval,int startIndex){
@@ -590,6 +655,14 @@ public class IncDecCircular extends RelativeLayout{
         this.startIndex=startIndex;
         this.index=startIndex;
         counter.setText(array.get(startIndex));
+    }
+
+    public void setArrayIndexes(int startIndexVal, int stopIndexVal, int interval){
+        this.startIndexVal=startIndexVal;
+        this.stopIndexVal=stopIndexVal;
+        this.int_val=interval;
+        this.index=startIndexVal;
+        counter.setText(array.get(startIndexVal));
     }
 
     /** Receive the value */
