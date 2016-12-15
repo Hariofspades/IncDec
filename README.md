@@ -65,9 +65,9 @@ ArrayList<String> values=new ArrayList<>();
  IncDecCircular incdec=(IncDecCircular)findViewById(R.id.incdec);
  incdec.setConfiguration(LinearLayout.HORIZONTAL,IncDecCircular.TYPE_ARRAY,
                 IncDecCircular.DECREMENT,IncDecCircular.INCREMENT);
-  incdec.setArrayList(values);
-  incdec.setArrayIndexes(1,3,1);
-  incdec.enableLongPress(true,true,500);
+ incdec.setArrayList(values);
+ incdec.setArrayIndexes(1,3,1);
+ incdec.enableLongPress(true,true,500);
 ```
 # Decoding the above function parameters
 
