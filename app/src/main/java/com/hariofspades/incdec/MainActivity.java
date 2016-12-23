@@ -1,5 +1,6 @@
 package com.hariofspades.incdec;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         incdecImg2.setArrayList(values);
         incdecImg2.setArrayIndexes(2,3,1);
         incdecImg2.enableLongPress(true,true,500);
-
+        incdecImg2.setBackground(null,null);
         incdec_vert.setOnClickListener(new IncDecCircular.OnClickListener() {
             @Override
             public void onClick(View view) {

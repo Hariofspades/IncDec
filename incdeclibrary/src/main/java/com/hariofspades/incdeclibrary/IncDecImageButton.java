@@ -48,6 +48,8 @@ public class IncDecImageButton extends RelativeLayout {
     private int textColor;
     private Drawable leftSrc;
     private Drawable rightSrc;
+    private Drawable leftBackground;
+    private Drawable rightBackground;
     private int leftButtonTint;
     private int rightButtonTint;
     private int leftDrawableTint;
@@ -122,23 +124,25 @@ public class IncDecImageButton extends RelativeLayout {
         TypedArray arr = mContext.obtainStyledAttributes(attrs,R.styleable.IncDecImageButton,
                 styleAttr,0);
         leftButtonTint=arr.getColor(R.styleable.IncDecImageButton_leftButtonColorTintB,
-                defaultColor);
+                0);
         rightButtonTint=arr.getColor(R.styleable.IncDecImageButton_rightButtonColorTinitB,
-                defaultColor);
+                0   );
         leftSrc=arr.getDrawable(R.styleable.IncDecImageButton_leftDrawableB);
         rightSrc=arr.getDrawable(R.styleable.IncDecImageButton_rightDrawableB);
         leftDrawableTint=arr.getColor(R.styleable.IncDecImageButton_leftDrawableTintB,white);
         rightDrawableTint=arr.getColor(R.styleable.IncDecImageButton_rightDrawableTintB,white);
         textSize=arr.getFloat(R.styleable.IncDecImageButton_textSizeB,13);
         textColor=arr.getColor(R.styleable.IncDecImageButton_textColorB,defaultTextColor);
+        leftBackground=arr.getDrawable(R.styleable.IncDecImageButton_leftBackground);
+        rightBackground=arr.getDrawable(R.styleable.IncDecImageButton_rightBackground);
         /** Component declaration */
         leftButton=(ImageButton) findViewById(R.id.decrement_button);
         rightButton=(ImageButton) findViewById(R.id.increment_button);
         counter=(TextView) findViewById(R.id.number_counter);
         layout=(LinearLayout) findViewById(R.id.layout);
 
-        setupLeftButton(leftButton,leftSrc,leftButtonTint,leftDrawableTint);
-        setupRightButton(rightButton,rightSrc,rightButtonTint,rightDrawableTint);
+        setupLeftButton(leftButton,leftSrc,leftButtonTint,leftDrawableTint,leftBackground);
+        setupRightButton(rightButton,rightSrc,rightButtonTint,rightDrawableTint,rightBackground);
         initLongClickListener(leftButton,rightButton,counter);
 
         arr.recycle();
@@ -147,7 +151,7 @@ public class IncDecImageButton extends RelativeLayout {
     }
 
     private void setupRightButton(ImageButton rightButton, Drawable rightSrc,
-                                  int rightButtonTint, int rightDrawableTint) {
+                                  int rightButtonTint, int rightDrawableTint,Drawable background) {
         if(rightSrc!=null) {
             rightSrc.setTintList(new ColorStateList(new int[][]{new int[]{0}},
                     new int[]{rightDrawableTint}));
@@ -155,10 +159,11 @@ public class IncDecImageButton extends RelativeLayout {
         }
         rightButton.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}},
                 new int[]{rightButtonTint}));
+        rightButton.setBackground(background);
     }
 
     private void setupLeftButton(ImageButton leftButton, Drawable leftSrc,
-                                 int leftButtonTint, int leftDrawableTint) {
+                                 int leftButtonTint, int leftDrawableTint,Drawable background) {
         if(leftSrc!=null) {
             leftSrc.setTintList(new ColorStateList(new int[][]{new int[]{0}},
                     new int[]{leftDrawableTint}));
@@ -166,6 +171,7 @@ public class IncDecImageButton extends RelativeLayout {
         }
         leftButton.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}},
                 new int[]{leftButtonTint}));
+        leftButton.setBackground(background);
 
     }
 
@@ -188,6 +194,11 @@ public class IncDecImageButton extends RelativeLayout {
 
     private void fixOrientation(LinearLayout layout, int orientation) {
         layout.setOrientation(orientation);
+    }
+
+    public void setBackground(Drawable leftBackground,Drawable rightBackground){
+        leftButton.setBackground(leftBackground);
+        rightButton.setBackground(rightBackground);
     }
 
     public void setLayoutParams(int first, int second){

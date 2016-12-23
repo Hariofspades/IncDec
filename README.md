@@ -144,6 +144,21 @@ IncDec for traditional ImageButton
         app:rightDrawableB="@drawable/ic_add_black_24dp"/>
 ```
 
+For Adding your own Background for ImageButton
+
+```java
+    IncDecImageButton incdecImg2=(IncDecImageButton) findViewById(R.id.incdecbut2);
+    incdecImg2.setBackground(ContextCompat.getDrawable(this,R.drawable.round),
+                    ContextCompat.getDrawable(this,R.drawable.round));
+```
+
+#Decoding function parameters
+setBackground - leftbutton background, right button background
+
+Note : By default, the background of the image button will be transparent. You can add
+lefttint and righttint for colours.
+
+
 ##Happy Coding!!
 
 ### Let's get connected

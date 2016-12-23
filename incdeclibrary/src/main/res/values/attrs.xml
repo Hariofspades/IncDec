@@ -23,6 +23,8 @@
         <attr name="rightDrawableTintB" format="color"/>
         <attr name="textSizeB" format="float"/>
         <attr name="textColorB" format="color"/>
+        <attr name="leftBackground" format="reference"/>
+        <attr name="rightBackground" format="reference"/>
 
     </declare-styleable>
 </resources>
