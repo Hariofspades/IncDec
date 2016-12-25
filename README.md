@@ -148,7 +148,7 @@ For Adding your own Background for ImageButton
 
 ```java
     IncDecImageButton incdecImg2=(IncDecImageButton) findViewById(R.id.incdecbut2);
-    incdecImg2.setBackground(ContextCompat.getDrawable(this,R.drawable.round),
+    incdecImg2.setBackgroundforButton(ContextCompat.getDrawable(this,R.drawable.round),
                     ContextCompat.getDrawable(this,R.drawable.round));
 ```
 

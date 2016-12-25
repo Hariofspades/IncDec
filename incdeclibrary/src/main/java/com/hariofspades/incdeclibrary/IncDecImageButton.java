@@ -133,8 +133,8 @@ public class IncDecImageButton extends RelativeLayout {
         rightDrawableTint=arr.getColor(R.styleable.IncDecImageButton_rightDrawableTintB,white);
         textSize=arr.getFloat(R.styleable.IncDecImageButton_textSizeB,13);
         textColor=arr.getColor(R.styleable.IncDecImageButton_textColorB,defaultTextColor);
-        leftBackground=arr.getDrawable(R.styleable.IncDecImageButton_leftBackground);
-        rightBackground=arr.getDrawable(R.styleable.IncDecImageButton_rightBackground);
+        leftBackground=arr.getDrawable(R.styleable.IncDecImageButton_leftBackgroundB);
+        rightBackground=arr.getDrawable(R.styleable.IncDecImageButton_rightBackgroundB);
         /** Component declaration */
         leftButton=(ImageButton) findViewById(R.id.decrement_button);
         rightButton=(ImageButton) findViewById(R.id.increment_button);
@@ -196,7 +196,7 @@ public class IncDecImageButton extends RelativeLayout {
         layout.setOrientation(orientation);
     }
 
-    public void setBackground(Drawable leftBackground,Drawable rightBackground){
+    public void setBackgroundforButton(Drawable leftBackground,Drawable rightBackground){
         leftButton.setBackground(leftBackground);
         rightButton.setBackground(rightBackground);
     }
