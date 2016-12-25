@@ -35,6 +35,7 @@ proguard/
 
 ##Old code
 .oldcodes/
+./oldcodes
 
 ## File-based project format:
 *.ipr
