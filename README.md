@@ -36,7 +36,7 @@ IncDec Library supports Android 2.3 (Gingerbread) and later.
 
 Add this in your build.gradle
 ```groovy
-compile 'com.hariofspades.IncDec:incdeclibrary:0.0.1'
+compile 'com.hariofspades.IncDec:incdeclibrary:0.0.2'
 ```
 Adding IncDec FAB in to the XML
 ```xml
