@@ -244,7 +244,7 @@ public class IncDecCircular extends RelativeLayout{
             finalValue_int=(int)finalValue;
             initialValue_int=(int)initialValue;
             currentValue_int=(int)startValue;
-            setTextCounter(counter,textSize,textColor,initialValue_int,2,currentValue);
+            setTextCounter(counter,textSize,textColor,initialValue_int,2,currentValue_int);
         }
     }
 
