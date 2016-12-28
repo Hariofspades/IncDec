@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.annotation.MainThread;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,7 +20,27 @@ import android.support.design.widget.FloatingActionButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.ArrayList;
+import java.util.Observer;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.internal.operators.observable.ObservableJust;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Created by Hari on 29/11/16.
@@ -90,6 +111,9 @@ public class IncDecCircular extends RelativeLayout{
     private int oldIndex;
     private int startIndexVal=0, stopIndexVal=0;
 
+    /** subscribers **/
+    DisposableSubscriber<Long> _Incrementsubscriber;
+    DisposableSubscriber<Long> _Decrementsubscriber;
 
     public IncDecCircular(Context context) {
         super(context);
@@ -312,9 +336,9 @@ public class IncDecCircular extends RelativeLayout{
                 if(leftLongPress) {
                     isLeftButtonLongPressed = true;
                     if (leftType.equals(INCREMENT))
-                        startIncrementTimerThread();
+                        startIncrementObserver();
                     else if (leftType.equals(DECREMENT))
-                        startDecrementTimerThread();
+                        startDecrementObserver();
                     else
                         Log.e(TAG, "invalid Type");
                     return true;
@@ -331,9 +355,9 @@ public class IncDecCircular extends RelativeLayout{
                 if(rightLongPress) {
                     isRightButtonLongPressed = true;
                     if (rightType.equals(INCREMENT))
-                        startIncrementTimerThread();
+                        startIncrementObserver();
                     else if (rightType.equals(DECREMENT))
-                        startDecrementTimerThread();
+                        startDecrementObserver();
                     else
                         Log.e(TAG, "invalid Type");
                     return true;
@@ -470,6 +494,8 @@ public class IncDecCircular extends RelativeLayout{
     }
 
 
+
+
     private boolean checkIncVaidation(int startValue, int minimum, int maximum){
         if((startValue>=minimum && startValue<=maximum)&&(startValue!=maximum)) {
             return true;
@@ -489,26 +515,6 @@ public class IncDecCircular extends RelativeLayout{
         }
     }
 
-/*    public void IncrementAction(){
-        if(type.equals(TYPE_ARRAY)){
-            oldIndex=index;
-            try{
-                index=index+int_val;
-                counter.setText(array.get(index));
-            }catch (Exception e){
-                index=array.size()-1;
-                counter.setText(array.get(array.size()-1));
-            }
-            callArryListener(this,oldIndex,index);
-        }else if(type.equals(TYPE_FLOAT)){
-            float num= Float.parseFloat(counter.getText().toString());
-            setFloatNumber(num+interval, true,num);
-        }else if(type.equals(TYPE_INTEGER)){
-            int num= Integer.parseInt(counter.getText().toString());
-            setIntNumber(num+(int)interval,true,num);
-        }else
-            Log.e(TAG,"error");
-    } */
 
     /** Decrement Action */
     private void DecrementAction() {
@@ -533,27 +539,6 @@ public class IncDecCircular extends RelativeLayout{
         }else
             Log.e(TAG,"error");
     }
-
-/*    private void DecrementAction() {
-        if(type.equals(TYPE_ARRAY)){
-            oldIndex=index;
-            try{
-                index=index-int_val;
-                counter.setText(array.get(index));
-            }catch (Exception e){
-                index=0;
-                counter.setText(array.get(index));
-            }
-            callArryListener(this,oldIndex,index);
-        }else if(type.equals(TYPE_FLOAT)){
-            float num= Float.parseFloat(counter.getText().toString());
-            setFloatNumber(num-interval, true,num);
-        }else if(type.equals(TYPE_INTEGER)){
-            int num= Integer.parseInt(counter.getText().toString());
-            setIntNumber(num-(int)interval,true,num);
-        }else
-            Log.e(TAG,"error");
-    } */
 
     /** Set float value */
     public void setFloatNumber(float number, boolean notifyListener,float num){
@@ -644,6 +629,101 @@ public class IncDecCircular extends RelativeLayout{
                 mValueListener.onValueChange(this,oldIndex,newIndex);
         }
     }
+
+    /** Rx Java **/
+
+    private void startIncrementObserver(){
+
+        _Incrementsubscriber=new DisposableSubscriber<Long>() {
+
+            @Override
+            public void onNext(Long aLong) {
+                if(isLeftButtonLongPressed||isRightButtonLongPressed) {
+                    IncrementAction();
+                }
+                else
+                    _Incrementsubscriber.dispose();
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.i(TAG,t.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        Flowable.interval(0,seconds,TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(_Incrementsubscriber);
+
+    }
+
+    private void startDecrementObserver(){
+
+        _Decrementsubscriber=new DisposableSubscriber<Long>() {
+
+            @Override
+            public void onNext(Long aLong) {
+                if(isLeftButtonLongPressed||isRightButtonLongPressed) {
+                    DecrementAction();
+                }
+                else
+                    _Decrementsubscriber.dispose();
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.i(TAG,t.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        Flowable.interval(0,seconds,TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(_Decrementsubscriber);
+
+
+    }
+
+
+    public void IncrementOperation(){
+        if(type.equals(TYPE_ARRAY)){
+            try {
+                oldIndex = index;
+                if (checkIncVaidation(index, startIndexVal, stopIndexVal)) {
+                    index = index + int_val;
+                    counter.setText(array.get(index));
+                    callArryListener(this, oldIndex, index);
+                } else {
+                    index = stopIndexVal;
+                    counter.setText(array.get(stopIndexVal));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }else if(type.equals(TYPE_FLOAT)){
+            float num= Float.parseFloat(counter.getText().toString());
+            setFloatNumber(num+interval, true,num);
+        }else if(type.equals(TYPE_INTEGER)){
+            int num= Integer.parseInt(counter.getText().toString());
+            setIntNumber(num+(int)interval,true,num);
+        }else
+            Log.e(TAG,"error");
+    }
+
+    /** **/
+
 
     /** Setting arraylist */
     public void setArrayList(ArrayList<String> arrayList){

@@ -18,6 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
  * Created by Hari on 03/12/16.
@@ -90,7 +95,9 @@ public class IncDecImageButton extends RelativeLayout {
     private int oldIndex;
     private int startIndexVal=0, stopIndexVal=0;
 
-
+    /** subscribers **/
+    DisposableSubscriber<Long> _Incrementsubscriber;
+    DisposableSubscriber<Long> _Decrementsubscriber;
 
     public IncDecImageButton(Context context) {
         super(context);
@@ -327,9 +334,9 @@ public class IncDecImageButton extends RelativeLayout {
                 if(leftLongPress) {
                     isLeftButtonLongPressed = true;
                     if (leftType.equals(INCREMENT))
-                        startIncrementTimerThread();
+                        startIncrementObserver();
                     else if (leftType.equals(DECREMENT))
-                        startDecrementTimerThread();
+                        startDecrementObserver();
                     else
                         Log.e(TAG, "invalid Type");
                     return true;
@@ -346,9 +353,9 @@ public class IncDecImageButton extends RelativeLayout {
                 if(rightLongPress) {
                     isRightButtonLongPressed = true;
                     if (rightType.equals(INCREMENT))
-                        startIncrementTimerThread();
+                        startIncrementObserver();
                     else if (rightType.equals(DECREMENT))
-                        startDecrementTimerThread();
+                        startDecrementObserver();
                     else
                         Log.e(TAG, "invalid Type");
                     return true;
@@ -461,6 +468,70 @@ public class IncDecImageButton extends RelativeLayout {
         new Thread(runnable).start();
     }
 
+    /** Rx Java **/
+
+    private void startIncrementObserver(){
+
+        _Incrementsubscriber=new DisposableSubscriber<Long>() {
+
+            @Override
+            public void onNext(Long aLong) {
+                if(isLeftButtonLongPressed||isRightButtonLongPressed) {
+                    IncrementAction();
+                }
+                else
+                    _Incrementsubscriber.dispose();
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.i(TAG,t.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        Flowable.interval(0,seconds, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(_Incrementsubscriber);
+
+    }
+
+    private void startDecrementObserver(){
+
+        _Decrementsubscriber=new DisposableSubscriber<Long>() {
+
+            @Override
+            public void onNext(Long aLong) {
+                if(isLeftButtonLongPressed||isRightButtonLongPressed) {
+                    DecrementAction();
+                }
+                else
+                    _Decrementsubscriber.dispose();
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.i(TAG,t.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        Flowable.interval(0,seconds,TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(_Decrementsubscriber);
+
+
+    }
 
     public void IncrementAction(){
         if(type.equals(TYPE_ARRAY)){
