@@ -32,11 +32,14 @@ IncDec Library can be included in any Android application.
 
 IncDec Library supports Android 2.3 (Gingerbread) and later. 
 
+## What's new in 0.0.4
+Migrated all thread related operations to Reactive Extensions (Rx)
+
 ## Using IncDec Library in your application
 
 Add this in your build.gradle
 ```groovy
-compile 'com.hariofspades.IncDec:incdeclibrary:0.0.3'
+compile 'com.hariofspades.IncDec:incdeclibrary:0.0.4'
 ```
 Adding IncDec FAB in to the XML
 ```xml
