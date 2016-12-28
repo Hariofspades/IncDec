@@ -32,7 +32,7 @@ IncDec Library can be included in any Android application.
 
 IncDec Library supports Android 2.3 (Gingerbread) and later. 
 
-## What's new in 0.0.4
+## What's new in 0.0.4?
 Migrated all thread related operations to Reactive Extensions (Rx)
 
 ## Using IncDec Library in your application
