@@ -9,7 +9,7 @@ ext {
     libraryDescription = 'Perform Increment and Decrement operation with single click and long press'
     siteUrl = 'https://github.com/Hariofspades/IncDec'
     gitUrl = 'https://github.com/Hariofspades/IncDec.git'
-    libraryVersion = '0.0.4'
+    libraryVersion = '0.0.5'
     developerId = 'hariofspades'
     developerName = 'Hari Vignesh Jayapalan'
     developerEmail = 'hariutd@gmail.com'
