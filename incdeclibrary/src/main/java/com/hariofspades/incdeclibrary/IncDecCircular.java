@@ -7,8 +7,11 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.MainThread;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -177,24 +180,51 @@ public class IncDecCircular extends RelativeLayout{
     private void setupRightButton(FloatingActionButton rightButton, Drawable rightSrc,
                                   int rightButtonTint, int rightDrawableTint) {
         if(rightSrc!=null) {
-            rightSrc.setTintList(new ColorStateList(new int[][]{new int[]{0}},
-                    new int[]{rightDrawableTint}));
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                rightSrc.setTintList(new ColorStateList(new int[][]{new int[]{0}},
+                        new int[]{rightDrawableTint}));
+            }
+            else
+            {
+                final Drawable wrappedDrawable = DrawableCompat.wrap(rightSrc);
+                DrawableCompat.setTintList(wrappedDrawable, ColorStateList.valueOf(rightDrawableTint));
+            }
             rightButton.setImageDrawable(rightSrc);
         }
-        rightButton.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}},
-                new int[]{rightButtonTint}));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            rightButton.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}},
+                    new int[]{rightButtonTint}));
+        }
+        else
+        {
+            ViewCompat.setBackgroundTintList(rightButton, ColorStateList.valueOf(rightButtonTint));
+        }
     }
 
     /** Setting up the left button */
     private void setupLeftButton(FloatingActionButton leftButton, Drawable leftSrc,
                                  int leftButtonTint, int leftDrawableTint) {
         if(leftSrc!=null) {
-            leftSrc.setTintList(new ColorStateList(new int[][]{new int[]{0}},
-                    new int[]{leftDrawableTint}));
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                leftSrc.setTintList(new ColorStateList(new int[][]{new int[]{0}},
+                        new int[]{leftDrawableTint}));
+            }
+            else
+            {
+                final Drawable wrappedDrawable = DrawableCompat.wrap(leftSrc);
+                DrawableCompat.setTintList(wrappedDrawable, ColorStateList.valueOf(leftDrawableTint));
+            }
             leftButton.setImageDrawable(leftSrc);
+
         }
-        leftButton.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}},
-                new int[]{leftButtonTint}));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            leftButton.setBackgroundTintList(new ColorStateList(new int[][]{new int[]{0}},
+                    new int[]{leftButtonTint}));
+        }
+        else
+        {
+            ViewCompat.setBackgroundTintList(leftButton, ColorStateList.valueOf(leftButtonTint));
+        }
 
     }
 
