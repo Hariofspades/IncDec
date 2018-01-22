@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     IncDecCircular incdec;
     IncDecCircular incdec_vert;
-    IncDecCircular incdecInt;
+    IncDecImageButton incdecInt;
     IncDecImageButton incdecImg;
     IncDecImageButton incdecImg2;
 
@@ -51,11 +51,12 @@ public class MainActivity extends AppCompatActivity {
         incdecImg.setprecision("%.1f");
         incdecImg.enableLongPress(false,false,500);
 
-        incdecInt=(IncDecCircular)findViewById(R.id.incdecInt);
-        incdecInt.setConfiguration(LinearLayout.HORIZONTAL,IncDecCircular.TYPE_INTEGER,
-                IncDecCircular.DECREMENT,IncDecCircular.INCREMENT);
+        incdecInt=(IncDecImageButton)findViewById(R.id.incdecInt);
+        incdecInt.setConfiguration(LinearLayout.HORIZONTAL,IncDecImageButton.TYPE_INTEGER,
+                IncDecImageButton.DECREMENT,IncDecImageButton.INCREMENT);
         incdecInt.setupValues(0,20,1,4);
         incdecInt.enableLongPress(true,true,500);
+        incdecInt.updateFinalValue(5f);
 
         incdecImg2=(IncDecImageButton) findViewById(R.id.incdecbut2);
         incdecImg2.setConfiguration(LinearLayout.HORIZONTAL,IncDecCircular.TYPE_ARRAY,

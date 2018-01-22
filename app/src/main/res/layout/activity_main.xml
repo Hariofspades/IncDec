@@ -42,19 +42,19 @@
         app:leftDrawable="@drawable/ic_add_black_24dp"
         app:rightDrawable="@drawable/ic_remove_black_24dp"/>
 
-    <com.hariofspades.incdeclibrary.IncDecCircular
+    <com.hariofspades.incdeclibrary.IncDecImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:textSize="24"
         android:id="@+id/incdecInt"
         android:layout_marginTop="20dp"
-        app:textColor="@color/white"
-        app:leftButtonColorTint="@color/colorPrimaryDark"
-        app:rightButtonColorTinit="@color/colorPrimary"
-        app:leftDrawableTint="@color/white"
-        app:rightDrawableTint="@color/white"
-        app:leftDrawable="@drawable/ic_remove_black_24dp"
-        app:rightDrawable="@drawable/ic_add_black_24dp"/>
+        app:textColorB="@color/white"
+        app:leftButtonColorTintB="@color/colorPrimaryDark"
+        app:rightButtonColorTinitB="@color/colorPrimary"
+        app:leftDrawableTintB="@color/white"
+        app:rightDrawableTintB="@color/white"
+        app:leftDrawableB="@drawable/ic_remove_black_24dp"
+        app:rightDrawableB="@drawable/ic_add_black_24dp"/>
 
     <com.hariofspades.incdeclibrary.IncDecImageButton
         android:layout_width="wrap_content"

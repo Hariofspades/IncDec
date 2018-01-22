@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
@@ -161,7 +162,7 @@ public class IncDecImageButton extends RelativeLayout {
     }
 
     private void setupRightButton(ImageButton rightButton, Drawable rightSrc,
-                                  int rightButtonTint, int rightDrawableTint,Drawable background) {
+                                  int rightButtonTint, int rightDrawableTint, Drawable background) {
         if(rightSrc!=null) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 rightSrc.setTintList(new ColorStateList(new int[][]{new int[]{0}},
@@ -292,6 +293,14 @@ public class IncDecImageButton extends RelativeLayout {
             setTextCounter(counter,textSize,textColor,initialValue_int,2,startValue);
         }
 
+    }
+
+    public void updateFinalValue(float finalValue) {
+        if(type.equals(TYPE_FLOAT)) {
+            this.finalValue = finalValue;
+        } else if(type.equals(TYPE_INTEGER)) {
+            finalValue_int=(int)finalValue;
+        }
     }
 
     public void setArrayValue(int index){
